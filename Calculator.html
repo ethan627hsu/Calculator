@@ -20,7 +20,7 @@
                 display:flex;
                 height:10%;
                 border:1px solid black;
-                font-size:5ex;
+                font-size:10ex;
             }
             #TypingGrid{
                 display:grid;
@@ -85,6 +85,7 @@
                     buttons[i].addEventListener('mouseup', buttonPressed);
                 }
                 Output.addEventListener('mouseup', buttonPressed);
+                
             }
             function buttonPressed(evt){
                 let spot = evt.target.id;
@@ -96,12 +97,9 @@
                 }
                 else{
                     calculator.numPressed[calculator.numPressed.length] = spot;
-                    console.log(calculator.numPressed)                    
+                    Output.innerHTML = calculator.numPressed.join('');                    
                 }
                 
-            }
-            function DisplayOutput(arr){
-
             }
             window.onload = init;
         </script>
