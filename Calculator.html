@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Calculator v1.0.0</title>
+        <title>calculator v1.0.0</title>
         <style type="text/CSS">
             .container{
                 background-color: gray;
@@ -16,11 +16,11 @@
             }
             #Output{
                 background-color:white;
-                width:100%;
+                width:99.80%;
                 display:flex;
                 height:10%;
                 border:1px solid black;
-                font-size:10ex;
+                font-size:5ex;
             }
             #TypingGrid{
                 display:grid;
@@ -63,43 +63,49 @@
                 <div class = 'buttons' id = '8'>8</div>
                 <div class = 'buttons' id = '9'>9</div>
                 <div class = 'buttons' id = '*'>*</div>
-                <div class = 'buttons' id = '±'>±</div>
                 <div class = 'buttons' id = '0'>0</div>
                 <div class = 'buttons' id = '.'>.</div>
-                <div class = 'buttons' id = 'Enter'>Enter</div>
+                <div class = 'buttons' id = 'Enter'>=</div>
+                <div class = 'buttons' id = '/'>/</div>
             </div>
         </div>
         <script type="text/javascript">
             let Output = document.getElementById('Output');
-            let calculator = {
-                spots:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                numPressed:[],
-                num1: 0,
-                num1: 0,
+            let calc = {
+                numPress:[],
+                equation:'',
+                answer: 0,
                 Output:0
             }
                 
             function init() {
                 let buttons = document.getElementsByClassName('buttons');
-                for(let i = 0; i < calculator.spots.length; i++){
+                for(let i = 0; i < 16; i++){
                     buttons[i].addEventListener('mouseup', buttonPressed);
                 }
                 Output.addEventListener('mouseup', buttonPressed);
-                
             }
             function buttonPressed(evt){
                 let spot = evt.target.id;
                 if(spot == 'Output'){
-                    for(i = 0; i < calculator.numPressed.length; i++){
-                        calculator.numPressed.splice(i);
-                    }
-                    Output.innerHTML = '';
+                    clear(calc.numPress);
                 }
-                else{
-                    calculator.numPressed[calculator.numPressed.length] = spot;
-                    Output.innerHTML = calculator.numPressed.join('');                    
+                else if(spot == 'Enter'){
+                    calc.answer = eval(calc.equation);
+                    Output.innerHTML = calc.answer;
+                }
+                else {
+                    calc.numPress[calc.numPress.length + 1] = spot;
+                    calc.equation = calc.numPress.join("");
+                    Output.innerHTML = calc.equation;               
                 }
                 
+            }
+            function clear(arr){
+                for(i = 0; i < arr.length; i++){
+                    arr.splice(i);
+                }
+                Output.innerHTML = '';
             }
             window.onload = init;
         </script>
