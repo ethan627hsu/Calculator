@@ -7,7 +7,7 @@ insta:david_wu_22
 
 Version History:
 
-v2: Finished Calculator
+v2.0.0: Finished Calculator
 
 v1.0.1: Added Output numbers
 
